@@ -1,0 +1,18 @@
+[
+    {
+      "ProjectID": "P001",
+      "ProjectName": "AI Chatbot",
+      "Client": "TechCorp"
+    },
+    {
+      "ProjectID": "P002",
+      "ProjectName": "E-commerce Website",
+      "Client": "Retail Inc."
+    },
+    {
+        "ProjectID": "P003",
+        "ProjectName": "food delivery",
+        "Client": "swiggy"
+      }
+  ]
+  
