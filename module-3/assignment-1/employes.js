@@ -3,6 +3,7 @@ const express = require ('express')
 const app =express()
 const fs = require('fs').promises
 const path= require('path')
+const { title } = require('process')
 
 const port = 5200
 
@@ -21,6 +22,11 @@ const port = 5200
 
 //     })
 // }
+
+app.set('views',path.join(__dirname,'src','view'))
+app.set('view engine','ejs')
+
+app.use(express.static(path.join(__dirname,'src','public')))
 
 async function getDetails(pathname){
     try{
@@ -44,7 +50,7 @@ app.get('/employee/:id',async(req ,res)=>{
     const file = await getDetails('employees.json')
     const filterdata= await file.find(x=>x.EmployeeID == empID )
     if(filterdata){
-        res.json(filterdata)
+        res.render('employes',{filterdata, title:'Employee Details'})
     }
     else{
         res.status(400).send('ID not found')
@@ -61,7 +67,7 @@ app.get('/project/:id', async(req,res)=>{
     const file =await getDetails('projects.json')
     const filterdata= await file.find(x=>x.ProjectID==projectID)
     if(filterdata){
-        res.json(filterdata)
+        res.render('projects',{filterdata,title:'Project Details'})
     }
 
     else{
@@ -70,6 +76,28 @@ app.get('/project/:id', async(req,res)=>{
         console.error(err)
         res.status(500).send("Internal Server Error");
     }
+})
+
+app.get('/getemployeedetails',async (req,res)=>{
+    try{
+    const employeeDetail = await getDetails('employees.json');
+    const projectDetail = await getDetails('projects.json')
+
+   employeeInfo= await employeeDetail.map(emp => {
+    const project=  projectDetail.find(x=>x.ProjectID == emp.ProjectID)
+    
+    return {...emp,project}
+})
+
+  res.render('employeinfo',{employeeInfo,title:'All Employees'})
+
+
+    }catch(err){
+        res.status(500).send('Internal server error')
+        console.log(err)
+
+    }
+
 })
 
 

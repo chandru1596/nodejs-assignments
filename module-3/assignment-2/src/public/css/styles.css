@@ -1,9 +1,16 @@
 .overall-wrap{
-    width:50%
+    width:50%;
+    height: 80%;
 }
 
 table{
+overflow-y: auto;
     animation: tableSlow 1s cubic-bezier(0.075, 0.54, 0.165, 1);
+}
+
+thead tr {
+position: sticky;
+top:0;
 }
 
 h3{
