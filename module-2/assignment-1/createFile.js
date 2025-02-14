@@ -6,8 +6,8 @@ const content= 'you are awesome'
 yargs.command(
     'create',
     'create a file',
-    {file:{
-        describe:'file to create',
+    {file:{               //node createFile.js create --file=demo.txt
+        describe:'file to create',   
         demandOption:true,
         type:'string'
     }},
