@@ -1,0 +1,9 @@
+1.) db.movies.find().pretty()
+2.) db.movies.findOne({name:"Black Panther"})
+3.) db.movies.aggregate([{$sort:{rate:-1}},{$limit:3}]).pretty()
+4.) db.movies.updateMany({rate:5},{$set:{achievements:'Super Duper Hit'}}),
+    db.movies.updateMany({rate:4.5},{$set:{achievements:'Super Hit'}})
+
+5.) db.movies.find({achievements:{$in:['Super Duper Hit','Super Hit']}}).pretty()   (or)
+    db.movies.find({$or:[{achievements:'Super Duper Hit'},{achievements:'Super Hit'}]}).pretty()   
+6.)db.movies.find({achievements:{$exists:true,$ne:''}}).pretty()
