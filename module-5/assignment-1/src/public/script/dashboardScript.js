@@ -18,12 +18,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const timedifference = (Date.now() - new Date(dashboardData[i].date))
                 const dayDifference = (timedifference/(1000 * 60 * 60 * 24))
                 let status= ''
+                let statusClass=''
                 if(dayDifference <=1 ){
                       status= 'In-Progress'
+                      statusClass='s-yellow'
                 }else if(dayDifference >1 && dayDifference <=2){
                      status = 'Dispatched'
+                     statusClass='s-orange'
                 } else{
                     status = 'Delivered'
+                    statusClass='s-green'
                 }
                 const row = document.createElement("tr");
                 row.innerHTML= `<td>${i+1}</td>
@@ -31,7 +35,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 <td>${dashboardData[i].email}</td>
                 <td>${dashboardData[i].mobile}</td>
                 <td>${dashboardData[i].address}</td>
-                <td>${status}</td>
+                <td class='${statusClass}'>${status}</td>
                 `
                 orderTable.appendChild(row)
             }
@@ -40,6 +44,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const orderTable = document.getElementById("orderDetails");
             const row = document.createElement("tr");
             row.innerHTML=`<td colspan=6>No Orders</td>`
+            orderTable.appendChild(row)
         }
 
 
