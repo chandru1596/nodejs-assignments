@@ -17,6 +17,7 @@
     "express": "^4.21.2",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.2",
+    "nodemailer": "^6.10.0",
     "yargs": "^17.7.2"
   }
 }
