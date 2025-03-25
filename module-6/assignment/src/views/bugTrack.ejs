@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Use only Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
+
+    <!-- Use latest jQuery and DataTables -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+    <center>
+        <div>
+            <button type="button" class="update btn btn-success"
+                       data-toggle="modal" data-target="#myModal">
+                          Create Bug
+                      </button>
+        </div>
+    </center>
+    <h3>Bug Tracking</h3>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped" id="bugTable">
+            <caption>List of users</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.no</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Assignee</th>
+                    <th>Created At</th>
+                    <th>Days Left</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i<data.length; i++) {%>
+                    <tr class="<%= moment().diff(moment(data.createdAt), 'days') >= 3 ? 'highlight' : '' %>">
+                        <td>
+                            <%=i+1 %>
+                        </td>
+                        <td>
+                            <%= data[i].title %>
+                        </td>
+                        <td>
+                            <%= data[i].description %>
+                        </td>
+                        <td>
+                            <%= data[i].assignee %>
+                        </td>
+                        <td>
+                            <%= moment(data.createdAt).format('YYYY-MM-DD HH:mm') %>
+                        </td>
+                        <td>
+                            <%= 3 - moment().diff(moment(data.createdAt), 'days' ) %> days
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/addBug" method="POST" id="update_user">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Bug</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <h2>Create</h2>
+                        
+                            <input type="hidden" id="original_name" name="original_name">
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" class="form-control" id="title" placeholder="Enter title"
+                                    name="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <input type="text" class="form-control" id="description" placeholder="Enter description"
+                                    name="description" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignee">Assignee :</label>
+                                <input type="text" class="form-control" id="assignee" placeholder="Enter assignee"
+                                    name="assignee" required>
+                            </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" id="create_bug" class="btn btn-primary">Create</button>
+                </div>
+            </form> 
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/js/bugTrack.js"></script>
+ </body>
+
+</html>
