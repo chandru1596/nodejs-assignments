@@ -2,18 +2,21 @@
   "name": "nodejs-assignments",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node module-7/assignment/server.js",
-    "dev": "nodemon module-7/assignment/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node module-9/app.js",
+    "dev": "nodemon module-9/app.js",
+    "test": "mocha module-9/test/common.test.js ----timeout 10000"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/chai-http": "^3.0.5",
     "axios": "^1.7.9",
     "bcryptjs": "^3.0.2",
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.1",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
@@ -25,5 +28,8 @@
     "redis": "^4.7.0",
     "socket.io": "^4.8.1",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "mocha": "^11.1.0"
   }
 }
